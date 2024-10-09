@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, rgba(106, 130, 251, 0.7), rgba(252, 92, 125, 0.7)),
+                        linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.2));
+            background-size: 200% 200%; /* Ensures smooth transition */
+            animation: gradientAnimation 5s ease infinite;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-top: 40px; /* Added margin at the top */
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            animation: fadeIn 1s ease-in-out; /* Fade-in effect for the form */
+            margin-bottom: 20px; /* Added margin at the bottom */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        input[type="submit"] {
+            background-color: #fc5c7d;
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #6a82fb;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.5s ease; /* Slide-in effect for the result */
+            display: none; /* Initially hidden */
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Breast Cancer Tumor Prediction</h1>
+    <div class="form-container">
+        <form id="prediction-form" action="/predict" method="POST">
+            <!-- Set 1 -->
+            <label for="radius1">Radius 1:</label>
+            <input type="text" id="radius1" name="radius1" required>
+
+            <label for="texture1">Texture 1:</label>
+            <input type="text" id="texture1" name="texture1" required>
+
+            <label for="perimeter1">Perimeter 1:</label>
+            <input type="text" id="perimeter1" name="perimeter1" required>
+
+            <label for="area1">Area 1:</label>
+            <input type="text" id="area1" name="area1" required>
+
+            <label for="smoothness1">Smoothness 1:</label>
+            <input type="text" id="smoothness1" name="smoothness1" required>
+
+            <label for="compactness1">Compactness 1:</label>
+            <input type="text" id="compactness1" name="compactness1" required>
+
+            <label for="concavity1">Concavity 1:</label>
+            <input type="text" id="concavity1" name="concavity1" required>
+
+            <label for="concave_points1">Concave Points 1:</label>
+            <input type="text" id="concave_points1" name="concave_points1" required>
+
+            <label for="symmetry1">Symmetry 1:</label>
+            <input type="text" id="symmetry1" name="symmetry1" required>
+
+            <label for="fractal_dimension1">Fractal Dimension 1:</label>
+            <input type="text" id="fractal_dimension1" name="fractal_dimension1" required>
+
+            <!-- Set 2 -->
+            <label for="radius2">Radius 2:</label>
+            <input type="text" id="radius2" name="radius2" required>
+
+            <label for="texture2">Texture 2:</label>
+            <input type="text" id="texture2" name="texture2" required>
+
+            <label for="perimeter2">Perimeter 2:</label>
+            <input type="text" id="perimeter2" name="perimeter2" required>
+
+            <label for="area2">Area 2:</label>
+            <input type="text" id="area2" name="area2" required>
+
+            <label for="smoothness2">Smoothness 2:</label>
+            <input type="text" id="smoothness2" name="smoothness2" required>
+
+            <label for="compactness2">Compactness 2:</label>
+            <input type="text" id="compactness2" name="compactness2" required>
+
+            <label for="concavity2">Concavity 2:</label>
+            <input type="text" id="concavity2" name="concavity2" required>
+
+            <label for="concave_points2">Concave Points 2:</label>
+            <input type="text" id="concave_points2" name="concave_points2" required>
+
+            <label for="symmetry2">Symmetry 2:</label>
+            <input type="text" id="symmetry2" name="symmetry2" required>
+
+            <label for="fractal_dimension2">Fractal Dimension 2:</label>
+            <input type="text" id="fractal_dimension2" name="fractal_dimension2" required>
+
+            <!-- Set 3 -->
+            <label for="radius3">Radius 3:</label>
+            <input type="text" id="radius3" name="radius3" required>
+
+            <label for="texture3">Texture 3:</label>
+            <input type="text" id="texture3" name="texture3" required>
+
+            <label for="perimeter3">Perimeter 3:</label>
+            <input type="text" id="perimeter3" name="perimeter3" required>
+
+            <label for="area3">Area 3:</label>
+            <input type="text" id="area3" name="area3" required>
+
+            <label for="smoothness3">Smoothness 3:</label>
+            <input type="text" id="smoothness3" name="smoothness3" required>
+
+            <label for="compactness3">Compactness 3:</label>
+            <input type="text" id="compactness3" name="compactness3" required>
+
+            <label for="concavity3">Concavity 3:</label>
+            <input type="text" id="concavity3" name="concavity3" required>
+
+            <label for="concave_points3">Concave Points 3:</label>
+            <input type="text" id="concave_points3" name="concave_points3" required>
+
+            <label for="symmetry3">Symmetry 3:</label>
+            <input type="text" id="symmetry3" name="symmetry3" required>
+
+            <label for="fractal_dimension3">Fractal Dimension 3:</label>
+            <input type="text" id="fractal_dimension3" name="fractal_dimension3" required>
+
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+
+    <div class="result" id="result">
+        <!-- Prediction result will be displayed here -->
+    </div>
+
+    <script>
+        document.getElementById('prediction-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            
+            // Extract form values
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = parseFloat(value); // Ensure values are numbers
+            });
+    
+            // Simulated prediction logic (replace this with actual prediction logic)
+            // For demonstration, let's say we use a simple heuristic based on the first feature
+            const firstFeature = data['radius1']; // Assuming radius1 is a significant feature
+            let prediction = '';
+    
+            // Add your model's logic here
+            if (firstFeature > 10) {  // Example threshold; replace with your model logic
+                prediction = "Malignant Tumor Detected";
+            } else {
+                prediction = "Benign Tumor Detected";
+            }
+    
+            // Display result
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h2>${prediction}</h2>`;
+            resultDiv.style.display = 'block'; // Show the result
+        });
+    </script>
+    
+</body>
+</html>
