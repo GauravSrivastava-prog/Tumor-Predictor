@@ -84,4 +84,4 @@ pip install -r requirements.txt
 
 ## Conclusion
 
-This project provides a basic framework for breast cancer prediction using the Wisconsin Diagnostic dataset. Further improvements can be explored by incorporating feature engineering, hyperparameter tuning, and ensemble methods.
+This project provides a basic framework for breast cancer prediction using the Wisconsin Diagnostic dataset. 
